@@ -12,11 +12,13 @@ DependencyProvider::DependencyProvider(const std::string& directoryPath, Filenam
         }
         std::string line;
         bool flag = false;
+
         // Read file line by line
         while (std::getline(file, line))
         {
             std::istringstream iss(line);
             std::string token;
+
             while (iss >> token)
             {
                 if (token == "#include")
@@ -26,13 +28,18 @@ DependencyProvider::DependencyProvider(const std::string& directoryPath, Filenam
                     iss >> headerName;
                     if (headerName.find("header") != std::string::npos)
                     {
+                        // deleting quotes of "include"
                         std::string dependency = headerName.substr(1, headerName.size() - 2);
+                        // filename to number (header_n => n - 1)
                         int fileNumber = matcher.filenameToNumber(filename);
                         int dependencyNumber = matcher.filenameToNumber(dependency);
+                        // filling map with corresponding values 
                         dependencies[fileNumber].push_back(dependencyNumber);
                     }
                 }
             }
+
+            // if "include" is not found in the header creating empty vector for its value
             if (!flag)
             {
                 int fileNumber = matcher.filenameToNumber(filename);
@@ -41,6 +48,7 @@ DependencyProvider::DependencyProvider(const std::string& directoryPath, Filenam
         }
         file.close();
     }
+
     // Sort dependencies for each file
     for (auto& pair : dependencies)
     {

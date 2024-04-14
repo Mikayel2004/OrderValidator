@@ -1,5 +1,6 @@
 #include "FilenameMatcher.h"
 
+// checking if filename is right 
 FilenameMatcher::FilenameMatcher(const std::string& directoryPath)
 {
     int number = 0;
@@ -9,6 +10,7 @@ FilenameMatcher::FilenameMatcher(const std::string& directoryPath)
         if (entry.is_regular_file() && entry.path().extension() == ".h")
         {
             std::string filename = entry.path().filename().string();
+
             // Check if filename contains "header"
             if (filename.find("header") != std::string::npos)
             {

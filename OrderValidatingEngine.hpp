@@ -1,5 +1,6 @@
 #include "OrderValidatingEngine.h"
 
+// execute method user input parameter
 void OrderValidatingEngine::execute(std::istream& in, std::ostream& out)
 {
     std::string directoryPath;
@@ -7,6 +8,7 @@ void OrderValidatingEngine::execute(std::istream& in, std::ostream& out)
 
     std::vector<std::string> filenames;
     std::string filename;
+
     // Read filenames
     while (std::getline(in, filename))
     {
@@ -20,6 +22,7 @@ void OrderValidatingEngine::execute(std::istream& in, std::ostream& out)
     OrderValidator validator(dependencies);
 
     auto result = validator.isOrderCorrect(filenames, matcher);
+
     // Output result
     if (result.first)
     {

@@ -8,16 +8,19 @@ std::pair<bool, std::string> OrderValidator::isOrderCorrect(const std::vector<st
 {
     std::vector<int> res = { matcher.filenameToNumber(filenames[0]) };
     int temp = dependencies[matcher.filenameToNumber(filenames[0])].size();
+
     // Iterate over filenames to check dependencies
     for (int i = 1; i < filenames.size(); ++i)
     {
         if (dependencies[matcher.filenameToNumber(filenames[i])].size() < temp)
         {
-            return std::make_pair(false, "The order of filenames is not correct.");
-        } else
+            return std::make_pair(false, "Incorrect file processing order.");
+        } 
+        else
         {
             temp = dependencies[matcher.filenameToNumber(filenames[i])].size();
         }
+
         // Check if dependencies are met
         for (const auto& value : dependencies[matcher.filenameToNumber(filenames[i])])
         {
@@ -28,6 +31,7 @@ std::pair<bool, std::string> OrderValidator::isOrderCorrect(const std::vector<st
         }
         res.push_back(matcher.filenameToNumber(filenames[i]));
     }
+
     // Check for circular includes
     for (int i = 0; i < dependencies.size(); ++i)
     {
