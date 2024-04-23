@@ -8,7 +8,7 @@ DependencyProvider::DependencyProvider(const std::string& directoryPath, Filenam
         std::ifstream file(directoryPath + "/" + filename);
         if (!file.is_open())
         {
-            throw std::runtime_error("Could not open file: " + filename);
+            throw std::runtime_error("The file " + filename + " was not found; file processing is terminated.");
         }
         std::string line;
         bool flag = false;
@@ -28,6 +28,12 @@ DependencyProvider::DependencyProvider(const std::string& directoryPath, Filenam
                     iss >> headerName;
                     if (headerName.find("header") != std::string::npos)
                     {
+                        std::ifstream file(directoryPath + "/" + headerName.substr(1, headerName.size() - 2));
+                        if (!file.is_open())
+                        {
+                            std::cout << "The file " << (headerName.substr(1, headerName.size() - 2)) << " was not found; File processing is terminated." << std::endl;
+                            std::exit(EXIT_FAILURE);
+                        }
                         // deleting quotes of "include"
                         std::string dependency = headerName.substr(1, headerName.size() - 2);
                         // filename to number (header_n => n - 1)

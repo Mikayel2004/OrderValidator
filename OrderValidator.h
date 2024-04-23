@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef ORDERVALIDATOR_H
-#define ORDERVALIDATOR_H
-
 #include <vector>
 #include <map>
 #include <string>
@@ -21,5 +18,3 @@ public:
     // Check if the order of filenames is correct
     std::pair<bool, std::string> isOrderCorrect(const std::vector<std::string>& filenames, FilenameMatcher& matcher);
 };
-
-#endif // ORDERVALIDATOR_H

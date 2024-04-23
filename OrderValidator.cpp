@@ -9,6 +9,18 @@ std::pair<bool, std::string> OrderValidator::isOrderCorrect(const std::vector<st
     std::vector<int> res = { matcher.filenameToNumber(filenames[0]) };
     int temp = dependencies[matcher.filenameToNumber(filenames[0])].size();
 
+    // Check for circular includes
+    for (int i = 0; i < dependencies.size(); ++i)
+    {
+        for (int j = 0; j < dependencies[i].size(); ++j)
+        {
+            if (std::find(dependencies[j].begin(), dependencies[j].end(), i) != dependencies[j].end())
+            {
+                return std::make_pair(false, "Circular include detected; file processing is terminated.");
+            }
+        }
+    }
+
     // Iterate over filenames to check dependencies
     for (int i = 1; i < filenames.size(); ++i)
     {
@@ -32,16 +44,5 @@ std::pair<bool, std::string> OrderValidator::isOrderCorrect(const std::vector<st
         res.push_back(matcher.filenameToNumber(filenames[i]));
     }
 
-    // Check for circular includes
-    for (int i = 0; i < dependencies.size(); ++i)
-    {
-        for (int j = 0; j < dependencies[i].size(); ++j)
-        {
-            if (std::find(dependencies[j].begin(), dependencies[j].end(), i) != dependencies[j].end())
-            {
-                return std::make_pair(false, "Circular include detected; file processing is terminated.");
-            }
-        }
-    }
     return std::make_pair(true, "File processing order is correct.");
 }

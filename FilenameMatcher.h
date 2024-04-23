@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef FILENAMEMATCHER_H
-#define FILENAMEMATCHER_H
-
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -24,5 +21,3 @@ public:
     // Convert number to its corresponding filename
     std::string numberToFilename(int number);
 };
-
-#endif // FILENAMEMATCHER_H

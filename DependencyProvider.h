@@ -1,8 +1,6 @@
 #pragma once
 
-#ifndef DEPENDENCYPROVIDER_H
-#define DEPENDENCYPROVIDER_H
-
+#include <iostream>
 #include <string>
 #include <vector>
 #include <map>
@@ -23,5 +21,3 @@ public:
     // Provide the dependencies map
     std::map<int, std::vector<int>> provideDependencies();
 };
-
-#endif // DEPENDENCYPROVIDER_H
