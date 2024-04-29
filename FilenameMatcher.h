@@ -8,8 +8,8 @@
 class FilenameMatcher
 {
 private:
-    std::unordered_map<std::string, int> filenameToNumberMap;
-    std::vector<std::string> numberToFilenameMap;
+    std::unordered_map<std::string, int> m_filenameToNumberMap;
+    std::vector<std::string> m_numberToFilenameMap;
 
 public:
     // Constructor to initialize FilenameMatcher

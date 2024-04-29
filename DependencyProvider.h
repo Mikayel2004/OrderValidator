@@ -12,7 +12,7 @@
 
 class DependencyProvider
 {
-    std::map<int, std::vector<int>> dependencies;
+    std::map<int, std::vector<int>> m_dependencies;
 
 public:
     // Constructor to initialize DependencyProvider

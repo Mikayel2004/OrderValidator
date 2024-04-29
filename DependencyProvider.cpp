@@ -40,7 +40,7 @@ DependencyProvider::DependencyProvider(const std::string& directoryPath, Filenam
                         int fileNumber = matcher.filenameToNumber(filename);
                         int dependencyNumber = matcher.filenameToNumber(dependency);
                         // filling map with corresponding values 
-                        dependencies[fileNumber].push_back(dependencyNumber);
+                        m_dependencies[fileNumber].push_back(dependencyNumber);
                     }
                 }
             }
@@ -49,14 +49,14 @@ DependencyProvider::DependencyProvider(const std::string& directoryPath, Filenam
             if (!flag)
             {
                 int fileNumber = matcher.filenameToNumber(filename);
-                dependencies[fileNumber] = {};
+                m_dependencies[fileNumber] = {};
             }
         }
         file.close();
     }
 
     // Sort dependencies for each file
-    for (auto& pair : dependencies)
+    for (auto& pair : m_dependencies)
     {
         std::sort(pair.second.begin(), pair.second.end());
     }
@@ -64,5 +64,5 @@ DependencyProvider::DependencyProvider(const std::string& directoryPath, Filenam
 
 std::map<int, std::vector<int>> DependencyProvider::provideDependencies()
 {
-    return dependencies;
+    return m_dependencies;
 }

@@ -9,7 +9,7 @@
 
 class OrderValidator
 {
-    std::map<int, std::vector<int>> dependencies;
+    std::map<int, std::vector<int>> m_dependencies;
 
 public:
     // Constructor to initialize OrderValidator
@@ -17,4 +17,5 @@ public:
 
     // Check if the order of filenames is correct
     std::pair<bool, std::string> isOrderCorrect(const std::vector<std::string>& filenames, FilenameMatcher& matcher);
+    bool isCyclic(int v, std::vector<bool>& visited, std::vector<bool>& dfsVisited);
 };
